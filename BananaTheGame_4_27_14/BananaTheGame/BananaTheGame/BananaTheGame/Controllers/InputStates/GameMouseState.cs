@@ -85,9 +85,42 @@ namespace BananaTheGame.Controllers
             return false;
         }
 
+        //public static Vector2 WorldPosition()//ray method
+        //{
+        //    Vector3 nearPlane = BananaGame.Graphics.Viewport.Unproject(new Vector3(mouseState.X, mouseState.Y, 0),
+        //        BananaGame.GameCamera.Projection, BananaGame.GameCamera.View, Matrix.Identity);
+
+        //    Vector3 farPlane = BananaGame.Graphics.Viewport.Unproject(new Vector3(mouseState.X, mouseState.Y, 1),
+        //        BananaGame.GameCamera.Projection, BananaGame.GameCamera.View, Matrix.Identity);
+
+        //    Ray ray = new Ray(nearPlane, farPlane - nearPlane);
+
+        //    float? depth = ray.Intersects(new Plane(Vector3.UnitZ, 0));
+
+        //    if (depth != null)
+        //    {
+        //        Vector3 mouseFinal = (nearPlane + (farPlane - nearPlane) * depth.Value);
+        //        return new Vector2(mouseFinal.X, mouseFinal.Y);
+        //    }
+
+        //    return Vector2.Zero;
+
+        //}
+
         public static Vector2 WorldPosition()
         {
-            return new Vector2(0, 0);
+            Vector3 nearPlane = BananaGame.Graphics.Viewport.Unproject(new Vector3(mouseState.X, mouseState.Y, 0),
+                BananaGame.GameCamera.Projection, BananaGame.GameCamera.View, Matrix.Identity);
+
+            Vector3 farPlane = BananaGame.Graphics.Viewport.Unproject(new Vector3(mouseState.X, mouseState.Y, 1),
+                BananaGame.GameCamera.Projection, BananaGame.GameCamera.View, Matrix.Identity);
+
+            Vector3 direction = farPlane - nearPlane;
+
+            float zFactor = -nearPlane.Z / direction.Z;
+            Vector3 zeroWorldPoint = nearPlane + direction * zFactor;
+
+            return new Vector2(zeroWorldPoint.X, zeroWorldPoint.Y);
         }
 
         //public static Vector3 WorldPosition(GraphicsDeviceManager graphics, Camera3d camera)

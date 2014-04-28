@@ -29,9 +29,12 @@ namespace BananaTheGame.Control
 
         Chunk chunk;
         SimpleRenderer renderer;
+        TileHighlight highlight;
 
         public override void Load()
         {
+            highlight = new TileHighlight(new Vector2(20, 20), Color.Blue);
+
             chunk = new Chunk(new Vector2Int(0, 0));
             renderer = new SimpleRenderer();
             chunk.State = ChunkState.NotSoReady;
@@ -88,6 +91,12 @@ namespace BananaTheGame.Control
         public override void Update(GameTime gameTime)
         {
             BananaGame.GamePlayer.Update(gameTime);
+            if (GameKeyState.IsKeyPressed(Keys.U))
+            {
+                //GameMouseState.WP();
+                Vector2Int blah = new Vector2Int(GameMouseState.WorldPosition());
+                highlight = new TileHighlight(blah.asVector2(), Color.Blue);
+            }
         }
 
         public override void Draw(GameTime gameTime)
@@ -97,6 +106,7 @@ namespace BananaTheGame.Control
             renderer.RenderChunk(chunk);
 
             BananaGame.Graphics.BlendState = BlendState.NonPremultiplied;
+            highlight.Draw();
         }
 
         public override void DrawSprite(GameTime gameTime)

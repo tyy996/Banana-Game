@@ -69,9 +69,11 @@ namespace BananaTheGame
             GameDebugger.Initialize();
             TextureHelper.Init();
             GameSpriteBatch = new SpriteBatch(graphics.GraphicsDevice);
+            TileHighlight.Initialize();
             roamState = new TestFreeRoamState();
             fightState = new TestFightState();
-            StateManager.QueueState(roamState);
+            StateManager.QueueState(fightState);
+            this.IsMouseVisible = true;
             base.Initialize();
         }
 
