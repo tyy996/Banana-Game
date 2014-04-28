@@ -152,7 +152,7 @@ namespace BananaTheGame.Controllers
         {
             Vector2 testDestination = new Vector2(30, 40);
 
-
+            // THIS IS A TEST TO SEE IF GITHUB WILL UPDATE HERE
             if(SelectedPlayer.Position.X < testDestination.X)
                 SelectedPlayer.AddAcceleration(new Vector2(1, 0));
             else if(SelectedPlayer.Position.X > testDestination.X)
@@ -162,8 +162,6 @@ namespace BananaTheGame.Controllers
                 SelectedPlayer.AddAcceleration(new Vector2(0, 1));
             else if (SelectedPlayer.Position.Y > testDestination.Y)
                 SelectedPlayer.AddAcceleration(new Vector2(0, -1));
-            
-            //SelectedPlayer.AddAcceleration(new Vector2(10, 0)); // Move player to the right (x, y) units
         }
     }
 }
